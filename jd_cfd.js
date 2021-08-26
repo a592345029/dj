@@ -40,7 +40,7 @@ let cookiesArr = [], cookie = '', token = '';
 let UA, UAInfo = {}
 let nowTimes;
 
-const randomCount = $.isNode() ? 0 : 3;
+const randomCount = $.isNode() ? 3 : 3;
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -60,11 +60,11 @@ $.appId = 10028;
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
   await requestAlgo();
   await $.wait(1000)
-  let res = await getAuthorShareCode('')
+  let res = await getAuthorShareCode('https://raw.fastgit.org/a592345029/backup/main/cfd.json')
   if (!res) {
-   //$.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: 'https://raw.fastgit.org/a592345029/backup/main/cfd.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('')
+    res = await getAuthorShareCode('https://raw.fastgit.org/a592345029/backup/main/cfd.json')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -114,11 +114,11 @@ $.appId = 10028;
       }
     }
     if ($.strMyShareIds && $.strMyShareIds.length && $.canHelp) {
-    //console.log(`\n助力作者\n`);
+      console.log(`\n助力作者\n`);
       for (let j = 0; j < $.strMyShareIds.length && $.canHelp; j++) {
-      //console.log(`账号${$.UserName} 去助力 ${$.strMyShareIds[j]}`)
+        console.log(`账号${$.UserName} 去助力 ${$.strMyShareIds[j]}`)
         $.delcode = false
-      //await helpByStage($.strMyShareIds[j])
+        await helpByStage($.strMyShareIds[j])
         await $.wait(2000)
         if ($.delcode) {
           $.strMyShareIds.splice(j, 1)
@@ -842,7 +842,7 @@ async function getActTask(type = true) {
           if (type) {
             for (let key of Object.keys(data.Data.TaskList)) {
               let vo = data.Data.TaskList[key]
-              if (vo.dwOrderId === 1 && vo.dwCompleteNum !== vo.dwTargetNum) {
+              if ([1, 2].includes(vo.dwOrderId) && (vo.dwCompleteNum !== vo.dwTargetNum)) {
                 console.log(`开始【🐮牛牛任务】${vo.strTaskName}`)
                 for (let i = vo.dwCompleteNum; i < vo.dwTargetNum; i++) {
                   console.log(`【🐮牛牛任务】${vo.strTaskName} 进度：${i + 1}/${vo.dwTargetNum}`)
@@ -854,7 +854,7 @@ async function getActTask(type = true) {
             data = await getActTask(false)
             for (let key of Object.keys(data.Data.TaskList)) {
               let vo = data.Data.TaskList[key]
-              if (vo.dwCompleteNum >= vo.dwTargetNum && vo.dwAwardStatus !== 1) {
+              if ((vo.dwCompleteNum >= vo.dwTargetNum) && vo.dwAwardStatus !== 1) {
                 await awardActTask('Award', vo)
                 await $.wait(2000)
               }
@@ -1601,16 +1601,16 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: `/`,
+      url: `http://share.turinglabs.net/api/v3/jxbfd/query/${randomCount}/`,
       'timeout': 10000
     }, (err, resp, data) => {
       try {
         if (err) {
-        //console.log(`${JSON.stringify(err)}`)
-        //console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-          //console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
+            console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
             data = JSON.parse(data);
           }
         }
