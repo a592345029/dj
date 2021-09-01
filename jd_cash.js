@@ -31,8 +31,8 @@ let helpAuthor = true;
 const randomCount = $.isNode() ? 5 : 5;
 let cash_exchange = false;//是否消耗2元红包兑换200京豆，默认否
 const inviteCodes = [
-  `eU9Yauy3N_Qm-D_Vw3YQgw`,
-  `eU9Yauy3N_Qm-D_Vw3YQgw`,
+  ``,
+  ``,
 ]
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -446,10 +446,13 @@ function getSign(functionid, body, uuid) {
       "client":"apple",
       "clientVersion":"10.1.0"
     }
+    let HostArr = ['jdsign.cf', 'jdsign.tk']
+    let Host = HostArr[Math.floor((Math.random() * HostArr.length))]
     let options = {
-      url: `https://service-ft43gk13-1302176878.sh.apigw.tencentcs.com/release/ddo`,
+      url: `https://cdn.jdsign.cf/ddo`,
       body: JSON.stringify(data),
       headers: {
+        Host,
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
       }
     }
@@ -489,7 +492,7 @@ function showMsg() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: `https://code.chiang.fun/api/v1/jd/jdcash/read/${randomCount}/`, 'timeout': 10000}, (err, resp, data) => {
+    $.get({url: `http://code.chiang.fun/api/v1/jd/jdcash/read/${randomCount}/`, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)

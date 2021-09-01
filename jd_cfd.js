@@ -62,9 +62,9 @@ $.appId = 10028;
   await $.wait(1000)
   let res = await getAuthorShareCode('https://raw.fastgit.org/a592345029/backup/main/cfd.json')
   if (!res) {
-    $.http.get({url: 'https://raw.fastgit.org/a592345029/backup/main/cfd.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('https://raw.fastgit.org/a592345029/backup/main/cfd.json')
+    res = await getAuthorShareCode('')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -591,7 +591,7 @@ async function getTakeAggrPage(type) {
                 let vo = data.Data.Sign.SignList[key]
                 if (vo.dwDayId === data.Data.Sign.dwTodayId) {
                   if (vo.dwStatus !== 1) {
-                    const body = `ddwCoin=${vo.ddwCoin}&ddwMoney=${vo.ddwMoney}&dwPrizeType=${vo.dwPrizeType}&strPrizePool=${vo.strPrizePool}&dwPrizeLv=${vo.dwBingoLevel}`
+                    const body = `ddwCoin=${vo.ddwCoin}&ddwMoney=${vo.ddwMoney}&dwPrizeType=${vo.dwPrizeType}&strPrizePool=${vo.strPrizePool}&dwPrizeLv=${vo.dwBingoLevel}&strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`
                     await rewardSign(body)
                     await $.wait(2000)
                   } else {
@@ -621,7 +621,7 @@ async function getTakeAggrPage(type) {
                 let vo = data.Data.Sign.SignList[key]
                 if (vo.dwDayId === data.Data.Sign.dwTodayId) {
                   if (vo.dwStatus !== 1) {
-                    const body = `ddwCoin=${vo.ddwCoin}&ddwMoney=${vo.ddwMoney}&dwPrizeType=${vo.dwPrizeType}&strPrizePool=${vo.strPrizePool}&dwPrizeLv=${vo.dwBingoLevel}`
+                    const body = `ddwCoin=${vo.ddwCoin}&ddwMoney=${vo.ddwMoney}&dwPrizeType=${vo.dwPrizeType}&strPrizePool=${vo.strPrizePool}&dwPrizeLv=${vo.dwBingoLevel}&strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`
                     await rewardSign(body, 6)
                     await $.wait(2000)
                   } else {
