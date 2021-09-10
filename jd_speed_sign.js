@@ -87,15 +87,15 @@ async function jdGlobal() {
     await apTaskList()
     await wheelsHome()
 
-    await signInit()
-    await sign()
+    // await signInit()
+    // await sign()
     await invite()
     await invite2()
     $.score = 0
     $.total = 0
     await taskList()
     await queryJoy()
-    await signInit()
+    // await signInit()
     await cash()
     await showMsg()
   } catch (e) {
@@ -117,7 +117,7 @@ async function signInit() {
     $.get(taskUrl('speedSignInit', {
       "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
       "kernelPlatform": "RN",
-      "inviterId":"xeEyypq6BfhlGVnJq6ftxCXGyLwopsaeYx"
+      "inviterId":"1234567890abcdefg"
     }), async (err, resp, data) => {
       try {
         if (err) {
@@ -142,7 +142,7 @@ async function sign() {
   return new Promise(resolve => {
     $.get(taskUrl('speedSign', {
         "kernelPlatform": "RN",
-        "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
+        "activityId": "8a8fabf3cccb417f8e8bc2",
         "noWaitPrize": "false"
       }),
       async (err, resp, data) => {
@@ -675,7 +675,7 @@ function taskGetUrl(function_id, body) {
 function invite2() {
   let t = +new Date()
   let inviterId = [
-    "xeEyypq6BfhlGVnJq6ftxCXGyLwopsaeYx",
+    "5V7vHE23qh2EkdBHXRFDuA==",
     "4AVQao+eH8Q8kvmXnWmkG8ef/fNr5fdejnD9+9Ugbec="
   ][Math.floor((Math.random() * 2))]
   let headers = {
@@ -704,7 +704,8 @@ function invite2() {
 function invite() {
   let t = +new Date()
   let inviterId = [
-    "xeEyypq6BfhlGVnJq6ftxCXGyLwopsaeYx"
+    "5V7vHE23qh2EkdBHXRFDuA==",
+    "jbGBRBPo5DmwB9ntTCSVOGXuh1YQyccCuZpWwb3PlIc="
   ][Math.floor((Math.random() * 2))]
   var headers = {
     'Host': 'api.m.jd.com',
