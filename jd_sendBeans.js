@@ -1,7 +1,7 @@
 /*
 * 来客有礼小程序
 * 搬运不知名人士
-* cron 45 4 * * *
+* cron 23 10 * * *
 * */
 const $ = new Env('送豆得豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -262,10 +262,7 @@ async function rewardBean(){
         'content-type' : `application/json`,
         'Connection' : `keep-alive`,
         'Accept-Encoding' : `gzip,compress,br,deflate`,
-        'App-Id' : `wxccb5c536b0ecd1bf`,
-        'Lottery-Access-Signature' : `wxccb5c536b0ecd1bf1537237540544h79HlfU`,
         "User-Agent": $.UA,
-        'openId' : `oPcgJ4_X7uCMeTgGmar-rmiWst1Y`,
         'Host' : `draw.jdfcloud.com`,
         'Referer' : `https://servicewechat.com/wxccb5c536b0ecd1bf/733/page-frame.html`,
         'cookie' : $.cookie,
@@ -309,10 +306,7 @@ async function help() {
         'content-type' : `application/json`,
         'Connection' : `keep-alive`,
         'Accept-Encoding' : `gzip,compress,br,deflate`,
-        'App-Id' : `wxccb5c536b0ecd1bf`,
-        'Lottery-Access-Signature' : `wxccb5c536b0ecd1bf1537237540544h79HlfU`,
         "User-Agent": $.UA,
-        'openId' : `oPcgJ4_X7uCMeTgGmar-rmiWst1Y`,
         'Host' : `draw.jdfcloud.com`,
         'Referer' : `https://servicewechat.com/wxccb5c536b0ecd1bf/733/page-frame.html`,
         'cookie' : $.cookie,
@@ -324,7 +318,7 @@ async function help() {
       try {
         if (res) {
           res = JSON.parse(res);
-          if(res.data.result === 5){
+          if([2,5,7].includes(res.data.result)){
             $.oneTuanInfo['completed'] = true;
           }else if(res.data.result === 0 || res.data.result === 1){
             $.canHelp = false;
@@ -341,16 +335,13 @@ async function help() {
 }
 
 async function invite() {
-  const url = `https://draw.jdfcloud.com/common/api/bean/activity/invite?activityCode=${$.activityCode}&openId=oPcgJ4_X7uCMeTgGmar-rmiWst1Y&activityId=${$.activityId}&userSource=mp&formId=123&jdChannelId=&fp=&appId=wxccb5c536b0ecd1bf&invokeKey=${$.invokeKey}`;
+  const url = `https://draw.jdfcloud.com/common/api/bean/activity/invite?activityCode=${$.activityCode}&activityId=${$.activityId}&userSource=mp&formId=123&jdChannelId=&fp=&appId=wxccb5c536b0ecd1bf&invokeKey=${$.invokeKey}`;
   const method = `POST`;
   const headers = {
     'content-type' : `application/json`,
     'Connection' : `keep-alive`,
     'Accept-Encoding' : `gzip,compress,br,deflate`,
-    'App-Id' : `wxccb5c536b0ecd1bf`,
-    'Lottery-Access-Signature' : `wxccb5c536b0ecd1bf1537237540544h79HlfU`,
     "User-Agent": $.UA,
-    'openId' : `oPcgJ4_X7uCMeTgGmar-rmiWst1Y`,
     'Host' : `draw.jdfcloud.com`,
     'Referer' : `https://servicewechat.com/wxccb5c536b0ecd1bf/733/page-frame.html`,
     'cookie' : $.cookie,
@@ -385,18 +376,15 @@ async function invite() {
 
 
 async function getActivityDetail() {
-  const url = `https://draw.jdfcloud.com/common/api/bean/activity/detail?activityCode=${$.activityCode}&activityId=${$.activityId}&userOpenId=oPcgJ4_X7uCMeTgGmar-rmiWst1Y&timestap=${Date.now()}&userSource=mp&jdChannelId=&appId=wxccb5c536b0ecd1bf&invokeKey=${$.invokeKey}`;
+  const url = `https://draw.jdfcloud.com/common/api/bean/activity/detail?activityCode=${$.activityCode}&activityId=${$.activityId}&timestap=${Date.now()}&userSource=mp&jdChannelId=&appId=wxccb5c536b0ecd1bf&invokeKey=${$.invokeKey}`;
   const method = `GET`;
   const headers = {
     'cookie' : $.cookie,
-    'openId' : `oPcgJ4_X7uCMeTgGmar-rmiWst1Y`,
     'Connection' : `keep-alive`,
-    'App-Id' : `wxccb5c536b0ecd1bf`,
     'content-type' : `application/json`,
     'Host' : `draw.jdfcloud.com`,
     'Accept-Encoding' : `gzip,compress,br,deflate`,
     "User-Agent": $.UA,
-    'Lottery-Access-Signature' : `wxccb5c536b0ecd1bf1537237540544h79HlfU`,
     'Referer' : `https://servicewechat.com/wxccb5c536b0ecd1bf/733/page-frame.html`,
     "lks": $.md5(""+$.invokeKey+lkt+$.activityCode),
     "lkt": lkt
