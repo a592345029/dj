@@ -119,7 +119,7 @@ function getUserInfo(info=true) {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data)
-            if (data.code === 2042) {
+            if (data.code === 2041) {
               $.score = data.result.assignment.assignmentPoints || 0
               if(info) console.log(`当前秒秒币${$.score}`)
             }
@@ -232,7 +232,7 @@ function doTask(body) {
 function showMsg() {
   return new Promise(resolve => {
     message += `本次运行获得秒秒币${$.score-$.cur}枚，共${$.score}枚`;
-    $.msg($.name, '', `京东账号${$.index}${$.nickName}\n${message}`);
+    $.msg($.name, '', `京东账号${$.index} ${$.nickName}\n${message}`);
     resolve()
   })
 }
