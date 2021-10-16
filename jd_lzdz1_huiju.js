@@ -28,10 +28,10 @@ if ($.isNode()) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
         return;
     }
-    authorCodeList = await getAuthorCodeList('')
+    authorCodeList = await getAuthorCodeList('https://gitee.com/fatelight/dongge/raw/master/dongge/lzdz1_huanju.json')
     if(authorCodeList === '404: Not Found'){
         authorCodeList = [
-            '',
+            '91245cc15b1847b1961c10c5412f2420',
         ]
     }
     // console.log(authorCodeList)
