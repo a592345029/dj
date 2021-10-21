@@ -1,7 +1,7 @@
 /*
 惠聚京东 好物连连
 
-https://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/activity/5063373?activityId=llk20211015&shareUuid=91245cc15b1847b1961c10c5412f2420
+https://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/activity/5063373?activityId=llk20211020&shareUuid=91245cc15b1847b1961c10c5412f2420
 */
 const $ = new Env("惠聚京东 好物连连");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -28,10 +28,10 @@ if ($.isNode()) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
         return;
     }
-    authorCodeList = await getAuthorCodeList('https://gitee.com/fatelight/dongge/raw/master/dongge/lzdz1_huanju.json')
+    authorCodeList = await getAuthorCodeList('')
     if(authorCodeList === '404: Not Found'){
         authorCodeList = [
-            '91245cc15b1847b1961c10c5412f2420',
+            'e4bf94e2bfb64e68aec75908af30a950',
         ]
     }
     // console.log(authorCodeList)
@@ -60,8 +60,8 @@ if ($.isNode()) {
             $.authorCode = ownCode ? ownCode : authorCodeList[random(0, authorCodeList.length)]
             $.authorNum = `${random(1000000, 9999999)}`
             $.randomCode = random(1000000, 9999999)
-            $.activityId = 'llk20211015'
-            $.activityShopId = '1000003005'
+            $.activityId = 'llk20211020'
+            $.activityShopId = '1000001373'
             $.activityUrl = `https://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/activity/${$.authorNum}?activityId=${$.activityId}&shareUuid=${encodeURIComponent($.authorCode)}&adsource=null&shareuserid4minipg=null&shopid=undefined&lng=00.000000&lat=00.000000&sid=&un_area=`
             await member();
             await $.wait(5000)
@@ -112,7 +112,7 @@ async function member() {
             if ($.openCardList) {
                 for (let i = 0; i < ($.openCardList.length); i++) {
                     $.log(">>> 模拟上报访问记录")
-                    await task('crm/pageVisit/insertCrmPageVisit', `venderId=1000003005&pageId=llk20211015&elementId=入会跳转&pin=${encodeURIComponent($.secretPin)}`, 1)
+                    await task('crm/pageVisit/insertCrmPageVisit', `venderId=1000001373&pageId=llk20211020&elementId=入会跳转&pin=${encodeURIComponent($.secretPin)}`, 1)
                     await $.wait(2000)
                 }
 
@@ -224,13 +224,13 @@ function task(function_id, body, isCommon = 0, own = 0) {
                                     console.log(data)
                                     break;
                                 case 'linkgame/assist/status':
-                                    $.log(JSON.stringify(data))
+                                    console.log(data)
                                     break;
                                 case 'linkgame/assist':
-                                    $.log(JSON.stringify(data))
+                                    console.log(data)
                                     break;
                                 case 'linkgame/help/list':
-                                    $.log(JSON.stringify(data))
+                                    console.log(data)
                                     break;
                                 default:
                                     // $.log(JSON.stringify(data))
