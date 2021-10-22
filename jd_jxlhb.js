@@ -46,9 +46,9 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
       '温馨提示：如提示助力火爆，可尝试寻找京东客服')
   let res = await getAuthorShareCode('https://raw.fastgit.org/a592345029/backup/main/lhb.json')
   if (!res) {
-    $.http.get({url: ''}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    $.http.get({url: 'https://raw.fastgit.org/a592345029/backup/main/lhb.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('')
+    res = await getAuthorShareCode('https://raw.fastgit.org/a592345029/backup/main/lhb.json')
   }
   if (res && res.activeId) $.activeId = res.activeId;
   $.authorMyShareIds = [...((res && res.codes) || [])];
