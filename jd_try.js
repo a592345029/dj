@@ -29,10 +29,16 @@ $.sentNum = 0;
 $.cookiesArr = []
 $.innerKeyWords =
     [
-        "路由器","数据线","充电器","笔记本",
-        "宠物", "饲料", "脚皮", "除臭",
+        "幼儿园", "教程", "英语", "辅导", "培训",
+        "孩子", "小学", "成人用品", "套套", "情趣",
+        "自慰", "阳具", "飞机杯", "男士用品", "女士用品",
+        "内衣", "高潮", "避孕", "乳腺", "肛塞", "肛门",
+        "宝宝", "玩具", "芭比", "娃娃", "男用",
+        "女用", "神油", "足力健", "老年", "老人",
+        "宠物", "饲料", "丝袜", "黑丝", "磨脚",
+        "脚皮", "除臭", "性感", "内裤", "跳蛋",
+        "安全套", "龟头", "阴道", "阴部"
     ]
-
 //下面很重要，遇到问题请把下面注释看一遍再来问
 let args_xh = {
     /*
@@ -42,7 +48,7 @@ let args_xh = {
      * C商品原价99元，试用价1元，如果下面设置为50，那么C商品将会被加入到待提交的试用组
      * 默认为0
      * */
-    jdPrice: process.env.JD_TRY_PRICE * 4 || 100,
+    jdPrice: process.env.JD_TRY_PRICE * 1 || 0,
     /*
      * 获取试用商品类型，默认为1，原来不是数组形式，我以为就只有几个tab，结果后面还有我服了
      * 1 - 精选
@@ -84,7 +90,7 @@ let args_xh = {
      * 过滤大于设定值的已申请人数，例如下面设置的1000，A商品已经有1001人申请了，则A商品不会进行申请，会被跳过
      * 可设置环境变量：JD_TRY_APPLYNUMFILTER
      * */
-    applyNumFilter: process.env.JD_TRY_APPLYNUMFILTER * 1 || 100,
+    applyNumFilter: process.env.JD_TRY_APPLYNUMFILTER * 1 || 10000,
     /*
      * 商品试用之间和获取商品之间的间隔, 单位：毫秒(1秒=1000毫秒)
      * 可设置环境变量：JD_TRY_APPLYINTERVAL
@@ -115,7 +121,7 @@ let args_xh = {
      * 不打印的缺点：无法清晰知道每个商品为什么会被过滤，哪个商品被添加到了待提交试用组
      * 可设置环境变量：JD_TRY_PLOG，默认为true
      * */
-    printLog: process.env.JD_TRY_PLOG || false,
+    printLog: process.env.JD_TRY_PLOG || true,
     /*
      * 白名单，是否打开，如果下面为true，那么黑名单会自动失效
      * 白名单和黑名单无法共存，白名单永远优先于黑名单
@@ -133,15 +139,16 @@ let args_xh = {
      * 每多少个账号发送一次通知，默认为4
      * 可通过环境变量控制 JD_TRY_SENDNUM
      * */
-    sendNum: process.env.JD_TRY_SENDNUM * 1 || 50,
+    sendNum: process.env.JD_TRY_SENDNUM * 1 || 4,
 }
 //上面很重要，遇到问题请把上面注释看一遍再来问
-let JD_TRY = true
 !(async() => {
+    console.log('X1a0He留：遇到问题请把脚本内的注释看一遍再来问，谢谢')
+    console.log('X1a0He留：遇到问题请把脚本内的注释看一遍再来问，谢谢')
     console.log('X1a0He留：遇到问题请把脚本内的注释看一遍再来问，谢谢')
     await $.wait(500)
     // 如果你要运行京东试用这个脚本，麻烦你把环境变量 JD_TRY 设置为 true
-    if(JD_TRY = true){
+    if(process.env.JD_TRY && process.env.JD_TRY === 'true'){
         await requireConfig()
         if(!$.cookiesArr[0]){
             $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
@@ -256,7 +263,7 @@ function requireConfig(){
         }
         if(typeof process.env.JD_TRY_WHITELIST === "undefined") args_xh.whiteList = false;
         else args_xh.whiteList = process.env.JD_TRY_WHITELIST === 'true';
-        if(typeof process.env.JD_TRY_PLOG === "undefined") args_xh.printLog = false;
+        if(typeof process.env.JD_TRY_PLOG === "undefined") args_xh.printLog = true;
         else args_xh.printLog = process.env.JD_TRY_PLOG === 'true';
         if(typeof process.env.JD_TRY_PASSZC === "undefined") args_xh.passZhongCao = true;
         else args_xh.passZhongCao = process.env.JD_TRY_PASSZC === 'true';
