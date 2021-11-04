@@ -668,7 +668,7 @@ function taskGetUrl(function_id, body) {
 function invite2() {
   let t = +new Date()
   let inviterIdArr = [
-    "xeEyypq6BfhlGVnJq6ftxCXGyLwopsaeYx/8zZxR9LE=",
+    "xeEyypq6BfhlGVnJq6ftxCXGyLwopsaeYx/8zZxR9LE="
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
@@ -694,7 +694,7 @@ function invite2() {
 function invite() {
   let t = +new Date()
   let inviterIdArr = [
-    "xeEyypq6BfhlGVnJq6ftxCXGyLwopsaeYx/8zZxR9LE=",
+    "xeEyypq6BfhlGVnJq6ftxCXGyLwopsaeYx/8zZxR9LE="
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
