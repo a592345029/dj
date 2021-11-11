@@ -26,7 +26,7 @@ let shopPageSize = $.getdata('jdUnsubscribeShopPageSize') || 0;// 运行一次�
 let stopGoods = $.getdata('jdUnsubscribeStopGoods') || '';//遇到此商品不再进行取关，此处内容需去商品详情页（自营处）长按拷贝商品信息
 let stopShop = $.getdata('jdUnsubscribeStopShop') || '';//遇到此店铺不再进行取关，此处内容请尽量从头开始输入店铺名称
 let delCount = 0;
-let hasKeyword = 全品,水饮; // 包含关键词的券
+let hasKeyword = 全品@水饮; // 包含关键词的券
 const JD_API_HOST = 'https://wq.jd.com/';
 
 !(async () => {
