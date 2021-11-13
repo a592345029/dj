@@ -44,7 +44,7 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
       '活动入口：京喜app-》我的-》京喜领88元红包\n' +
       '助力逻辑：先自己京东账号相互助力，如有剩余助力机会，则助力作者\n' +
       '温馨提示：如提示助力火爆，可尝试寻找京东客服')
-  let res = await getAuthorShareCode('https://raw.fastgit.org/a592345029/backup/main/lhb.json')
+  let res = await getAuthorShareCode('https://raw.hanada.ltd/a592345029/backup/main/lhb.json')
   if (!res) {
     $.http.get({url: 'https://purge.jsdelivr.net/gh/a592345029/backup@main/lhb.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     await $.wait(1000)
