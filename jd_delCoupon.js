@@ -167,6 +167,7 @@ function isJDCoupon(title) {
     return true
   else if (title.indexOf('拼购') > -1)
     return true
+  else if (title.indexOf('代金券') > -1)
   else
     return false
 }
