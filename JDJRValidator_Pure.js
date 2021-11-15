@@ -6,12 +6,10 @@
 const https = require('https');
 const http = require('http');
 const stream = require('stream');
-const { promisify } = require('util');
-const pipelineAsync = promisify(stream.pipeline);
 const zlib = require('zlib');
 const vm = require('vm');
 const PNG = require('png-js');
-const UA = require('./USER_AGENTS.js').USER_AGENT;
+const UA = require('../USER_AGENTS.js').USER_AGENT;
 
 
 Math.avg = function average() {
@@ -324,10 +322,11 @@ class JDJRValidator {
         let res = response;
         if (res.headers['content-encoding'] === 'gzip') {
           const unzipStream = new stream.PassThrough();
-          pipelineAsync(
+          stream.pipeline(
             response,
             zlib.createGunzip(),
             unzipStream,
+            reject,
           );
           res = unzipStream;
         }
