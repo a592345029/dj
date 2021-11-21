@@ -80,7 +80,7 @@ if ($.isNode()) {
 async function jsRedPacket() {
   try {
     await invite();
-    await sign();//极速版签到提现
+    // await sign();//极速版签到提现
     await reward_query();
     for (let i = 0; i < 3; ++i) {
       await redPacket();//开红包
@@ -396,7 +396,7 @@ function cashOut(id,poolBaseId,prizeGroupId,prizeBaseId,) {
 function invite() {
   let t = +new Date()
   let inviterId = [
-    "xeEyypq6BfhlGVnJq6ftxCXGyLwopsaeYx/8zZxR9LE="
+    "xeEyypq6BfhlGVnJq6ftxCXGyLwopsaeYx/8zZxR9LE"
   ][Math.floor((Math.random() * 1))]
   var headers = {
     'Host': 'api.m.jd.com',
