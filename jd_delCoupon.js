@@ -157,7 +157,7 @@ function isJDCoupon(title) {
     return true
   else if (title.indexOf('话费') > -1)
     return true
-  else if (title.indexOf('小鸽有礼') > -1)
+  else if (title.indexOf('全球购') > -1)
     return true
   else if (title.indexOf('旗舰店') > -1)
     return false
