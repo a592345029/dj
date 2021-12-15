@@ -497,7 +497,7 @@ function submitInviteId(userName) {
     try {
       $.post(
           {
-            url: `https://api.ninesix.cc/api/jx-nc/${$.info.smp}/${encodeURIComponent(userName)}?active=${$.info.active}&joinnum=${$.info.joinnum}`,
+            url: ``,
             timeout: 10000
           },
           (err, resp, _data) => {
@@ -526,7 +526,7 @@ function getAssistUser() {
   return new Promise(resolve => {
     try {
       $.get({
-        url: `https://api.ninesix.cc/api/jx-nc?active=${$.info.active}`,
+        url: ``,
         timeout: 10000
       }, async (err, resp, _data) => {
         try {
@@ -758,7 +758,7 @@ async function requestAlgo() {
       "expandParams": ""
     })
   }
-  new Promise(async resolve => {
+  return new Promise(async resolve => {
     $.post(options, (err, resp, data) => {
       try {
         if (err) {
