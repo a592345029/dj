@@ -6,14 +6,11 @@
 [task_local]
 #众筹许愿池
 40 0,2 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
 ================Loon==============
 [Script]
 cron "40 0,2 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js,tag=众筹许愿池
-
 ===============Surge=================
 众筹许愿池 = type=cron,cronexp="40 0,2 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js
-
 ============小火箭=========
 众筹许愿池 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, cronexpr="40 0,2 * * *", timeout=3600, enable=true
  */
@@ -25,8 +22,8 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ['1E1NXxq0', '1FFVQyqw','1F11Vx64'];
-let appNameArr = ['众筹许愿池', '1111点心动','冰雪闪耀季'];
+let appIdArr = ['1FFVQyqw', "1GVFUx6g", "1E1xZy6s"];
+let appNameArr = ['1111点心动', "JOY年尾之旅","PLUS生活特权"];
 let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
@@ -54,7 +51,6 @@ if ($.isNode()) {
       console.log(`\n*******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
-
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
@@ -78,12 +74,7 @@ if ($.isNode()) {
     await $.wait(1000)
     res = await getAuthorShareCode('')
   }
-  let res2 = await getAuthorShareCode('')
-  if (!res2) {
-    await $.wait(1000)
-    res2 = await getAuthorShareCode('')
-  }
-  $.shareCode = [...$.shareCode, ...(res || []), ...(res2 || [])]
+  $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -125,29 +116,24 @@ async function jd_wish() {
   try {
     await healthyDay_getHomeData();
     await $.wait(2000)
-
     let getHomeDataRes = (await healthyDay_getHomeData(false)).data.result.userInfo
     let forNum = Math.floor(getHomeDataRes.userScore / getHomeDataRes.scorePerLottery)
     await $.wait(2000)
-
     if (forNum === 0) {
       console.log(`没有抽奖机会\n`)
     } else {
       console.log(`可以抽奖${forNum}次，去抽奖\n`)
     }
-
     $.canLottery = true
     for (let j = 0; j < forNum && $.canLottery; j++) {
       await interact_template_getLotteryResult()
       await $.wait(2000)
     }
     if (message) allMessage += `京东账号${$.index} ${$.nickName || $.UserName}\n${appName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : ''}`
-
   } catch (e) {
     $.logErr(e)
   }
 }
-
 async function healthyDay_getHomeData(type = true) {
   return new Promise(async resolve => {
     $.post(taskUrl('healthyDay_getHomeData', {"appId":appId,"taskToken":"","channelId":1}), async (err, resp, data) => {
@@ -302,7 +288,6 @@ function interact_template_getLotteryResult() {
     })
   })
 }
-
 function taskUrl(function_id, body = {}) {
   return {
     url: `${JD_API_HOST}`,
@@ -320,7 +305,6 @@ function taskUrl(function_id, body = {}) {
     }
   }
 }
-
 function getAuthorShareCode(url) {
   return new Promise(async resolve => {
     const options = {
@@ -353,7 +337,6 @@ function getAuthorShareCode(url) {
     resolve();
   })
 }
-
 function TotalBean() {
   return new Promise(async resolve => {
     const options = {
