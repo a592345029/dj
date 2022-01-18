@@ -24,7 +24,7 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 const notify = $.isNode() ? require('./sendNotify') : "";
 let cookiesArr = [], cookie = "", allMessage = "", message;
 const inviteCodes = [
-  ``
+  ``,
 ]
 const ZLC = !(process.env.JD_JOIN_ZLC && process.env.JD_JOIN_ZLC === 'false')
 let reward = process.env.JD_HEALTH_REWARD_NAME ? process.env.JD_HEALTH_REWARD_NAME : ''
@@ -54,7 +54,7 @@ const JD_API_HOST = "https://api.m.jd.com/";
     return;
   }
   if (!process.env.JD_JOIN_ZLC) {
-    console.log(`【注意】本脚本已经清空助力`)
+    console.log(`【注意】本脚本默认会给助力池进行助力！\n如需加入助力池请添加TG群：https://t.me/jd_zero_205\n如不加入助力池互助，可添加变量名称：JD_JOIN_ZLC，变量值：false\n`)
   }
   await requireConfig()
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -82,6 +82,10 @@ const JD_API_HOST = "https://api.m.jd.com/";
 
 async function main() {
   try {
+    if (reward) {
+      await getCommodities()
+    }
+
     $.score = 0
     $.earn = false
     await getTaskDetail(-1)
@@ -97,10 +101,6 @@ async function main() {
     await helpFriends()
     await getTaskDetail(22);
     await getTaskDetail(-1)
-
-    if (reward) {
-      await getCommodities()
-    }
 
   } catch (e) {
     $.logErr(e)
