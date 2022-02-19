@@ -30,7 +30,7 @@ const MISSION_BASE_API = `https://ms.jr.jd.com/gw/generic/mission/h5/m`;
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let shareId = "hRYQeeaVYXQBX1Mguan2kA"
+let shareId = "CPyAwD0dDgcJ5xVYTKKpwcAdoUJQ3Dik"
 $.shareCodes = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -75,7 +75,7 @@ if ($.isNode()) {
       await jdPigPet();
     }
   }
-  let res2 = await getAuthorShareCode('https://raw.githubusercontent.com/a592345029/backup/main/jryz.json')
+  let res2 = await getAuthorShareCode('http://hk.xiaoyuhh.xyz:888/https://raw.githubusercontent.com/a592345029/backup/main/jryz.json')
   if (!res2) {
     $.http.get({url: 'https://purge.jsdelivr.net/gh/a592345029/backup@main/jryz.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(2000)
