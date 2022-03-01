@@ -41,9 +41,9 @@ let NowHour = new Date().getHours();
 let llhelp=true;
 if ($.isNode() && process.env.CC_NOHELPAFTER8) {	
 	if (process.env.CC_NOHELPAFTER8=="true"){
-		if (NowHour>20){
+		if (NowHour>8){
 			llhelp=false;
-			console.log(`现在是20点后时段，不启用互助....`);
+			console.log(`现在是9点后时段，不启用互助....`);
 		}			
 	}	
 }
