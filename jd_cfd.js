@@ -84,11 +84,11 @@ if ($.isNode()) {
       await $.wait(2000);
     }
   }
-  let res = await getAuthorShareCode('https://raw.githubusercontent.com/a592345029/backup/main/cfd.json')
+  let res = await getAuthorShareCode('')
   if (!res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/a592345029/bckup@main/cfd.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/a592345029/backup@main/cfd.json')
+    res = await getAuthorShareCode('')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
   await shareCodesFormat()
@@ -1492,7 +1492,7 @@ function taskUrl(function_path, body = '', dwEnv = 7) {
       "User-Agent": UA,
       "Accept-Language": "zh-CN,zh-Hans;q=0.9",
       "Referer": "https://st.jingxi.com/",
-      "Cookie": cookie
+      "Cookie": `cid=4;${cookie}`
     }
   }
 }
@@ -1510,7 +1510,7 @@ function taskListUrl(function_path, body = '', bizCode = 'jxbfd') {
       "User-Agent": UA,
       "Accept-Language": "zh-CN,zh-Hans;q=0.9",
       "Referer": "https://st.jingxi.com/",
-      "Cookie": cookie
+      "Cookie": `cid=4;${cookie}`
     }
   }
 }
