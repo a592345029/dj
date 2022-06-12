@@ -167,7 +167,11 @@ function isJDCoupon(title) {
     return true
   else if (title.indexOf('拼购') > -1)
     return true
-  else if (title.indexOf('仅可购买部分商品') > -1)
+  else if (title.indexOf('代金') > -1)
+    return true
+  else if (title.indexOf('每月权益') > -1)
+    return true
+  else if (title.indexOf('京造') > -1)
     return true
   else
     return false
