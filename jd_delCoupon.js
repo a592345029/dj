@@ -173,6 +173,8 @@ function isJDCoupon(title) {
     return true
   else if (title.indexOf('京造') > -1)
     return true
+  else if (title.indexOf('指定手机') > -1)
+    return true
   else
     return false
 }
