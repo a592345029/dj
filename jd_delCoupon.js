@@ -171,7 +171,7 @@ function isJDCoupon(title) {
     return true
   else if (title.indexOf('每月权益') > -1)
     return true
-  else if (title.indexOf('京造') > -1)
+  else if (title.indexOf('电器') > -1)
     return true
   else if (title.indexOf('指定手机') > -1)
     return true
