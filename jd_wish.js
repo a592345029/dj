@@ -25,8 +25,8 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ['1FFVQyqw','1EFRWxKuG', '1E1xZy6s'];
-let appNameArr = ['1111点心动','许愿抽好礼', 'PLUS生活特权'];
+let appIdArr = [];
+let appNameArr = [];
 let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
@@ -42,6 +42,10 @@ if ($.isNode()) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
+	if(appIdArr.length <= 0) {
+		console.log(`\n暂无活动~\n`);
+		return;
+	}
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -50,7 +54,7 @@ if ($.isNode()) {
       $.isLogin = true;
       $.nickName = '';
       message = '';
-      await TotalBean();
+      //await TotalBean();
       console.log(`\n*******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -60,6 +64,7 @@ if ($.isNode()) {
         }
         continue
       }
+			
       for (let j = 0; j < appIdArr.length; j++) {
         appId = appIdArr[j]
         appName = appNameArr[j]
@@ -150,17 +155,17 @@ async function healthyDay_getHomeData(type = true) {
             data = JSON.parse(data);
             // console.log(data);
             if (type) {
-               for (let key of Object.keys(data.data.result.hotTaskVos).reverse()) {
-                  let vo = data.data.result.hotTaskVos[key]  
-                  if (vo.status !== 2) {
-                  if (vo.taskType === 12) {
+              for (let key of Object.keys(data.data.result.hotTaskVos).reverse()) {
+                let vo = data.data.result.hotTaskVos[key]
+                if (vo.status !== 2) {
+                  if (vo.taskType === 13 || vo.taskType === 12) {
                     console.log(`点击热区`)
-                    await harmony_collectScore({"appId":appId,"taskToken":vo.simpleRecordInfoVo.taskToken,"taskId":vo.taskId,"actionType":"0"}, vo.taskType)
-                  }     
-                  }else {
+                    await harmony_collectScore({ "appId": appId, "taskToken": vo.simpleRecordInfoVo.taskToken, "taskId": vo.taskId, "actionType": "0" }, vo.taskType)
+                  } else {
                   console.log(`【${vo.taskName}】已完成\n`)
                 }
-               }
+				}	
+				}						
               for (let key of Object.keys(data.data.result.taskVos).reverse()) {
                 let vo = data.data.result.taskVos[key]
                 if (vo.status !== 2) {
@@ -189,6 +194,14 @@ async function healthyDay_getHomeData(type = true) {
                       if (productInfoVos.status !== 2) {
                         console.log(`【${productInfoVos.skuName}】${vo.subTitleName}`)
                         await harmony_collectScore({ "appId": appId, "taskToken": productInfoVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+                      }
+                    }
+                  } else if (vo.taskType === 3) {
+					for (let key of Object.keys(vo.shoppingActivityVos)) {
+                      let shoppingActivityVos = vo.shoppingActivityVos[key]
+                      if (shoppingActivityVos.status !== 2) {
+                        console.log(`【${vo.subTitleName}】`)
+                        await harmony_collectScore({ "appId": appId, "taskToken": shoppingActivityVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
                       }
                     }
                   } else if (vo.taskType === 8) {
